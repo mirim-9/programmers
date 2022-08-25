@@ -1,0 +1,74 @@
+import java.util.ArrayList;
+import java.util.*;
+class Solution {
+    public String solution(String new_id) {
+        
+        
+        //1단계
+        new_id = new_id.toLowerCase();
+       
+        //2단계
+        char[] secondChar = new_id.toCharArray();
+        StringBuilder Step2 = new StringBuilder();
+        for(char sc : secondChar){
+            if((sc>='a' && sc <= 'z') || (sc >= '0' && sc <= '9') || sc== '-' || sc=='_' || sc=='.')
+                Step2.append(sc);
+        }
+        
+        //3단계
+        String Step3 = Step2.toString().replace("..",".");
+        do{
+            Step3=Step3.replace("..",".");
+        }while(Step3.contains(".."));
+        
+        //4단계
+        char[] fourthChar = Step3.toCharArray();
+        StringBuilder Step4 = new StringBuilder();
+        for(int i =0;i<fourthChar.length;i++){
+            if((i==0 || i==fourthChar.length-1) && fourthChar[i]=='.'){
+                continue;
+            }else{
+                Step4.append(fourthChar[i]);
+            }
+                
+        }
+       
+        //5단계
+        String Step5 = Step4.length() == 0 ? "a" : Step4.toString();
+        
+        
+        //6단계
+        String Step6 = "";
+        if(Step5.length()>15){
+            for(int i=0;i<Step5.toCharArray().length;i++){
+                if(i>14) {
+                    break;
+                }
+                if(i==14 && Step5.toCharArray()[i]=='.'){
+                    continue;
+                }
+                
+                Step6 += Step5.toCharArray()[i];
+            }
+        }else{
+            Step6= Step5;
+        }
+        
+        //7단계
+        
+        StringBuilder Step7 = new StringBuilder();
+        Step7.append(Step6);
+        if(Step7.length()<3){
+            char deadStr = Step6.charAt(Step6.length()-1);
+            while(Step7.length()<3){
+                Step7.append(deadStr);
+            }
+        }
+        
+        
+        
+        String answer = Step7.toString();
+        return answer;
+    }
+    
+} 
