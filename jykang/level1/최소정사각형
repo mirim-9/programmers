@@ -1,0 +1,22 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[][] sizes) {
+        int answer = 0;
+
+        
+        int mx=0, my =0;
+        for(int i=0;i<sizes.length;i++){
+            int w = Math.max(sizes[i][0], sizes[i][1]); 
+            int h = Math.min(sizes[i][0], sizes[i][1]);
+            
+            mx = Math.max(mx, w);
+            my = Math.max(my, h);
+        }
+        answer = mx * my;
+        
+        
+        
+        return answer;
+    }
+}
