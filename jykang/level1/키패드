@@ -1,0 +1,67 @@
+class Solution {
+    Position l;
+    Position r;
+    Position n;
+    public String solution(int[] numbers, String hand) {
+        String answer = "";
+
+        //초기 왼/오 숫자 초기화
+        l = new Position(3,0);
+        r = new Position(3,2);
+
+        //누른 숫자
+        for(int num : numbers){
+            //누른 숫자 초기화
+            if(num==0) num = 11;
+            n = new Position((num-1)/3, (num-1)%3);
+
+            //주요손에 따른 finger
+            String finger = n.fingerChk(hand);
+            //finger를 answer 에 넣기
+            answer+=finger;
+            System.out.println("left("+ l.row + ", " + l.col + ") , right(" + r.row + ", " + r.col+ "), num("+ n.row + "," + n.col + ")");
+            //누른 숫자에 따른 왼/오 패드 초기화
+            if(finger.equals("R"))
+                r=n;
+            else{
+                l=n;
+            }
+        }
+
+        return answer;
+    }
+
+    public class Position{
+        private int row;
+        private int col;
+
+        Position(int row, int col){
+            this.row = row;
+            this.col = col;
+        }
+
+        public String fingerChk(String hand){
+            String finger = "";
+
+            if(hand.equals("right")) finger="R";
+            else finger="L";
+
+            if(this.col == 0) finger = "L";
+            else if(this.col==2) finger = "R";
+            else {
+                //왼쪽 숫자 거리 합과 오른쪽 거리 숫자 합을 따져서 L/R 정하기
+                int left_d = l.distance_cal(this);
+                int right_d = r.distance_cal(this);
+                
+                if(left_d < right_d) finger = "L";
+                else if(left_d > right_d ) finger = "R";
+            }
+            
+            return finger;
+        }
+
+        public int distance_cal(Position pp){
+            return Math.abs(this.row - pp.row) + Math.abs(this.col - pp.col);
+        }
+    }
+}
