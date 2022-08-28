@@ -1,0 +1,30 @@
+import java.util.*;
+import java.text.*;
+import java.time.*;
+
+class Solution {
+    public String solution(int a, int b) {
+        String answer = "";
+        try{
+        
+        String[] date = {"SUN","MON","TUE","WED","THU","FRI","SAT"};
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = sdf.parse("2016-"+a+"-"+b);
+        
+        Calendar cd = Calendar.getInstance();
+        cd.setTime(d);
+        
+        int day = cd.get(Calendar.DAY_OF_WEEK);
+        
+        answer = date[day-1];
+       
+        
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+       
+        return answer;
+    }
+}
