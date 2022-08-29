@@ -1,0 +1,12 @@
+SELECT B.hour, NVL(count,0) as count 
+FROM(
+    SELECT TO_CHAR(datetime, 'HH24') hour, count(*) count
+    FROM ANIMAL_OUTS 
+    GROUP BY TO_CHAR(datetime, 'HH24')
+    ORDER BY 1
+) A,
+    (
+        SELECT level-1 hour FROM dual CONNECT BY level<25
+    ) B
+WHERE B.hour = A.hour(+)//RIGHT JOIN
+ORDER BY B.hour
