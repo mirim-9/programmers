@@ -1,0 +1,40 @@
+import java.util.*;
+class Main{
+	public int solution(String s){
+		int answer = 0;
+		Stack<Integer> stack = new Stack<>();
+		
+		for(char x : s.toCharArray()){
+			if(Character.isDigit(x)) stack.push(x - 48);
+			else{ //연산자 만나면 제거
+				int rt = stack.pop();//1번째 stack값
+				int lt = stack.pop();//2번째 stack값
+				
+				switch(x){
+					case '+' : answer = (lt + rt); break;
+					case '-' : answer = (lt - rt); break;
+					case '*' : answer = (lt * rt); break;
+					case '/' : answer = (lt / rt); break;
+				}
+				stack.push(answer);
+			}
+		}
+
+		
+		return answer;
+		
+	}
+
+	public static void main(String[] args) 
+	{
+		Main m = new Main();
+		Scanner sc = new Scanner(System.in);
+
+		String s = sc.next();
+		
+		System.out.println(m.solution(s));
+	
+
+
+	}
+}
