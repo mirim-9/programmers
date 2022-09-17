@@ -1,0 +1,50 @@
+import java.util.*;
+class Main{
+	public int solution(int[][] board, int[] moves){
+		int answer = 0;
+		Stack<Integer> stack = new Stack<>();
+		
+		for(int pos : moves){
+			for(int i=0;i<board.length;i++){ 
+				if(board[i][pos-1] != 0){//인형이 있다면?
+					int temp = board[i][pos-1]; // 크레인이 들어올린 인형
+					board[i][pos-1] = 0;//해당 값은 temp에 넣었으므로 0처리
+					if(!stack.isEmpty() && stack.peek() == temp){
+						answer += 2;
+						stack.pop();
+					}else{
+						stack.push(temp);
+					}
+					break;
+				}
+			}
+		}
+
+		
+		return answer;
+		
+	}
+
+	public static void main(String[] args) 
+	{
+		Main m = new Main();
+		Scanner sc = new Scanner(System.in);
+
+		
+		int n = sc.nextInt();
+		int[][] bArr = new int[n][n];
+		for(int i=0;i<n;i++){
+			for(int j =0;j <n; j++){
+				bArr[i][j] = sc.nextInt();
+			}
+		}
+		int movesSize = sc.nextInt();
+		int[] moves = new int[movesSize];
+		for(int i=0;i<movesSize;i++){
+			moves[i] = sc.nextInt();
+		}
+		System.out.println(m.solution(bArr, moves));
+
+
+	}
+}
