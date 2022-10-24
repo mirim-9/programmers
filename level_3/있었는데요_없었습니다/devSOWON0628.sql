@@ -2,5 +2,5 @@ SELECT b.ANIMAL_ID AS 'ANIMAL_ID', b.NAME AS 'NAME'
 FROM ANIMAL_INS a LEFT JOIN ANIMAL_OUTS b 
 ON a.ANIMAL_ID = b.ANIMAL_ID
 where b.ANIMAL_ID IS NOT null 
-    AND timediff(b.DATETIME, a.DATETIME) < 0
+    AND timediff(b.DATETIME, a.DATETIME) < 0 # datediff 사용시 오류발생 timediff 사용 필요
 ORDER BY a.DATETIME;
