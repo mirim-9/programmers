@@ -1,0 +1,31 @@
+import java.util.*;
+class Solution {
+    public int solution(int[] ingredient) {
+        int result = 0;
+        
+        String a = "1231";
+        String str = Arrays.toString(ingredient).replace("[","").replace("]","").replaceAll(", ","");
+        
+         
+        int totalStrLength = str.length();
+        int reStrLength= 0;
+        if(str.contains(a)){
+            while(str.contains(a))
+            {
+                str = str.replace(a,"");
+                reStrLength  = str.length();
+            }
+            
+            int resultL = totalStrLength - reStrLength;
+            result = (totalStrLength-reStrLength)/4;
+            
+        }
+        else{
+            result = 0;
+        }
+        
+        
+        return result;
+        
+    }
+}
