@@ -1,21 +1,9 @@
 function solution(a, b, n) {
     let bottleCount = 0
-    while(true){
-        let resultBottle = returnBottle(a,b,n)
-        if(n < a){
-            break;
-        }else{
-            bottleCount+=resultBottle[0]
-            n = resultBottle[0]+resultBottle[1]
-        }
+    while(n >= a){
+        let resultBottle = Math.floor(n/a)*b
+        bottleCount+=resultBottle
+        n=resultBottle+(n%a)
     }
     return bottleCount;
-}
-
-function returnBottle(a, b, n){
-    if(n < a) {
-        return 0
-    }else{
-        return [Math.floor( n / a ) * b , n % a]
-    }
 }
