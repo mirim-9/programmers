@@ -3,27 +3,17 @@ class Solution {
     public int solution(int[] ingredient) {
         int result = 0;
         
-        String a = "1231";
-        String str = Arrays.toString(ingredient).replace("[","").replace("]","").replaceAll(", ","");
+        StringBuilder sb = new StringBuilder();
         
-         
-        int totalStrLength = str.length();
-        int reStrLength= 0;
-        if(str.contains(a)){
-            while(str.contains(a))
-            {
-                str = str.replace(a,"");
-                reStrLength  = str.length();
+        
+        for(int i=0;i<ingredient.length;i++){
+            sb.append(ingredient[i]);
+            
+            if(sb.length()>3 && sb.subSequence(sb.length()-4, sb.length()).equals("1231")){
+                result++;
+                sb.delete(sb.length()-4, sb.length());
             }
-            
-            int resultL = totalStrLength - reStrLength;
-            result = (totalStrLength-reStrLength)/4;
-            
         }
-        else{
-            result = 0;
-        }
-        
         
         return result;
         
