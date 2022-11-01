@@ -1,0 +1,25 @@
+import java.util.*;
+class Solution {
+    public String solution(String s) {
+        String answer = "";
+
+        String[] sArr = s.split(" ");
+        List<Integer> number= new ArrayList<>();
+
+        for(String str : sArr){
+            number.add(Integer.parseInt(str));    
+        }
+
+        int max = number.get(0);
+        int min = number.get(0);
+
+        for(int i : number){
+            if(max < i) max = i;
+            if(min > i ) min = i;
+        }
+
+        answer = Integer.toString(min) + " " + Integer.toString(max);
+
+        return answer;
+    }
+}
