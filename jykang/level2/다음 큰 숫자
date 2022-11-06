@@ -1,0 +1,33 @@
+import java.util.*;
+class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        
+        String str_n = Integer.toBinaryString(n);
+        int n_cnt = ownCount(str_n);
+        
+        while(true){
+            int temp = ++n;
+            String str_temp = Integer.toBinaryString(temp);
+            int temp_cnt = ownCount(str_temp);
+            
+            if(temp_cnt == n_cnt){
+                answer = temp;
+                break;
+            }
+        }
+        
+        return answer;
+    }
+    
+    public int ownCount(String str_num){
+        int result = 0;
+        
+        for(char x : str_num.toCharArray()){
+            if(x=='1'){
+                result ++;
+            }
+        }
+        return result;
+    }
+} 
