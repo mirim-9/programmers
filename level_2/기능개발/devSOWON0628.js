@@ -1,34 +1,21 @@
 function solution(progresses, speeds) {
-    let result = []
-    let day = 0
-    let deployFlag = false
-    let deployCount = 0
-    let length = 0
-    let removeValues = []
-    while(progresses.length!=0){
-        day++
-        deployFlag = false
-        length = progresses.length
-        removeValues = []
-        deployCount = 0
-        for(let i = 0 ; i < length ; i++){
-            if(progresses[i] + speeds[i]*day >= 100){
-                deployCount++
-                removeValues.push(progresses[i])
-                deployFlag = true
-            }else{
-                break;
-            }
-        }
-        if(deployFlag){
-            for(let value of removeValues){
-                let index = progresses.indexOf(value)
-                progresses.splice(index, 1)
-                speeds.splice(index, 1)
-            }           
-            result.push(deployCount)            
+    let needDays = progresses.map((progress, index)=>{
+        return Math.ceil((100-progress)/speeds[index])
+    })
+    let answer = [];
+    let deployCount = 1    
+    let deployDay = needDays.shift()
+    while(needDays.length != 0){
+        let today = needDays.shift()
+        if(today<=deployDay){
+            deployCount++
+        }else{
+            answer.push(deployCount)
+            deployDay = today
+            deployCount = 1
         }
     }
-    
-    return result;
+    // 남은 배포
+    answer.push(deployCount)
+    return answer;
 }
